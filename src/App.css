@@ -1,0 +1,300 @@
+body {
+  font-family:  Arial, Helvetica, sans-serif;
+  background-color: #F3F2EF;
+}
+
+a{
+color: black;
+ /* text-decoration: underline; */
+/* font-size:14px */
+}
+
+/* default btn styling */
+.default-btn-style{
+  background-color: transparent;
+  border: 1px solid rgb(78, 78, 78);
+  border-radius: 20px;
+  padding: 4px 18px;
+  width: fit-content;
+  /* min-width: 68px; */
+  /* max-width: fit-content; */
+}
+
+.default-btn-style:hover{
+  background-color: rgba(212, 212, 212, 0.3);
+  border: 1px solid rgb(78, 78, 78);
+  cursor: pointer;
+}
+
+/* default styling for components */
+.brdr-linkedin {
+  border: 2px solid #E9E8E5;
+  background-color: white;
+  height: fit-content;
+  border-radius: 18px;
+  padding: 24px 16px;
+}
+
+
+
+/* NAVBAR NAVBAR NAVBAR   NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR */
+/* vertical lign */
+.vl {
+  border-left: 3px solid darkslategray;
+  height: 50px;
+  margin-left: 20px;
+}
+
+.search {
+  max-width: 300px !important;
+}
+
+.nav-icons svg:hover {
+  fill: #3a3a3a;
+}
+
+.nav-icons small {
+  color: #B1B1B1;
+}
+
+.nav-icons small:hover {
+  color: #3a3a3a;
+}
+
+/* .small-hover :hover {
+  color: #3a3a3a;
+  fill: #3a3a3a;
+} */
+
+/*  PEOPLE YPU MAY KNOW  PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW  PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW */
+
+.brdr-linkedin h5 {
+  font-size: 18px
+}
+
+.brdr-linkedin-people-you-may-know {
+  min-width: 68px;
+  max-width: fit-content;
+}
+
+.who-and-where {
+  display: flex;
+}
+
+.name-company {
+  margin-left: 10px;
+}
+
+.name-company a h6{
+  margin-bottom: 0px;
+}
+
+.name-company p {
+  font-size: 12px;
+}
+
+.user-img-resize {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(96, 96, 122);
+}
+
+
+/* ABOUT ABOUT ABOUT */
+.overflow-height {
+  height: 100px;
+  text-overflow: ellipsis " [..]";
+  overflow: scroll;
+}
+
+
+/* AddExperiancd */
+.add-Exp{
+  text-overflow: ellipsis " [..]";
+}
+
+
+
+/* Toggle */
+
+
+.artdeco-toggle.artdeco-toggle--toggled:before {
+  box-shadow: inset 0 0 0 26px var(--color-checked),0 0 0 1px var(--transparent);
+}
+.artdeco-toggle:before {
+  pointer-events: all;
+  transition: all 83ms cubic-bezier(.4,0,1,1);
+  display: block;
+  content: "";
+  position: absolute;
+  top: calc(50% - 16px);
+  right: 0;
+  background-clip: content-box;
+  border: 1px solid var(--transparent);
+  width: 52px;
+  height: 32px;
+  border-radius: 17px;
+  background-color: var(--color-element-low-emphasis-shift);
+  box-sizing: content-box;
+}
+
+.artdeco-toggle:after, .artdeco-toggle:before {
+  top: unset!important;
+}
+
+
+
+/* ALL POSTS ALL POSTS ALL POSTS */
+.text-posts span {
+  padding: 5px;
+}
+
+.text-posts span:hover {
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  background-color: rgba(212, 212, 212, 0.3);
+}
+
+
+
+/* Create Post  Create Post  Create Post  Create Post  Create Post  Create Post  Create Post  Create Post  Create Post */
+.brdr-25 {
+  border-radius: 25px;
+}
+
+.create-post-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.create-post-flex Button {
+  width: 90%;
+  color: #656565;
+  height: 40px;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.user-area .text-area Button {
+  background-color: transparent !important;
+}
+
+.user-area .text-area Button:hover {
+  background-color: rgba(212, 212, 212, 0.4) !important;
+}
+
+/* .user-area .text-area Dropdown{
+} */
+
+.btn-outline-secondary:hover {
+  background-color: rgba(212, 212, 212, 0.3)!important;
+  border-radius: 25px!important;
+  cursor: pointer!important;
+  color: #656565;
+}
+
+.icon-text-flex span {
+  font-weight: 600;
+  color: #656565;
+  margin-left: 10px;
+}
+
+.icon-text-flex {
+  padding: 8px 10px;
+}
+
+.icon-text-flex:hover {
+  background-color: rgba(212, 212, 212, 0.5);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Create Post Modal  Create Post Modal  Create Post Modal  Create Post Modal  Create Post Modal  Create Post Modal  Create Post Modal */
+.create-post-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+
+.create-post-modal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  border-radius: 25px;
+  padding: 16px 24px;
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.row-of-icons svg {
+  fill: #3a3a3a;
+}
+
+.row-of-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.row-of-icons .icon-text-flex {
+  /* not roperly orund but ok */
+  border-radius: 28px;
+}
+
+.text-area-post-modal .btn-outline-primary {
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  color: #0468BF;
+}
+
+.text-area-post-modal .btn-outline-primary:hover {
+  /* also, official colour */
+  background-color: #E3F0FE;
+}
+
+
+/* ALL POSTS */
+.brdr-linkedin-posts {
+  border: 2px solid #E9E8E5;
+  background-color: white;
+  height: fit-content;
+  border-radius: 18px;
+  margin-bottom: 20px;
+}
+
+.brdr-linkedin-posts img .special-img{
+  border-radius:0 0 18px 18px ;
+}
+
+.posts-info-top {
+  padding: 16px 24px;
+}
+
+.text-posts img {
+  margin-bottom: 15px;
+}
+
+.text-posts img {
+  margin-right: 10px;
+}
+
+.text-posts {
+  display: flex;
+}
