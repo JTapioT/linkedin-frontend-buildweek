@@ -10,35 +10,32 @@ class AddPost extends React.Component {
     },
   };
 
-       FetchPostDetails = async () => {
-
-      try {
-        let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/posts/",
-          {
-            headers: {
-              "Authorization":
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY4MTFkNTZmMGM3MTAwMTUwZWE2YmUiLCJpYXQiOjE2MzQyMTAyNjEsImV4cCI6MTYzNTQxOTg2MX0.kpbIrgfWZiaf6lYYxY0jpxTc7d9vdqW4BhDRcKqJwE0",
-            },
-          }
-        );
-        let data = await response.json();
-        if (response.ok) {
-          console.log("here", data);
-          // SetMyProfile(data.data);
-        } else {
-          console.log("something went wrong");
+  FetchPostDetails = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/posts/",
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
+          },
         }
-      } catch (error) {
-        console.log(error);
+      );
+      let data = await response.json();
+      if (response.ok) {
+        console.log("here", data);
+        // SetMyProfile(data.data);
+      } else {
+        console.log("something went wrong");
       }
-    };
-   
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   postToBeAdded = async () => {
-     let formData = new FormData();
-   formData.append("post", this.state.image);
-    
+    let formData = new FormData();
+    formData.append("post", this.state.image);
 
     try {
       let response = await fetch(
@@ -49,7 +46,7 @@ class AddPost extends React.Component {
           headers: {
             "Content-Type": "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY4MTFkNTZmMGM3MTAwMTUwZWE2YmUiLCJpYXQiOjE2MzQyMTAyNjEsImV4cCI6MTYzNTQxOTg2MX0.kpbIrgfWZiaf6lYYxY0jpxTc7d9vdqW4BhDRcKqJwE0",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
           },
           //   body: JSON.stringify({ text: formData }),
         }
@@ -114,14 +111,13 @@ class AddPost extends React.Component {
               <input
                 type="file"
                 onChange={(e) =>
-                  this.setState({ ...this.state, image:e.target.files[0] })
+                  this.setState({ ...this.state, image: e.target.files[0] })
                 }
                 accept="image/png, image/jpeg"
               />
             </Form.Group>
             {/* <Button variant="outline-primary">Hashtag</Button> */}
           </Form>
-
         </div>
 
         {/* <div className="App">

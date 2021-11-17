@@ -1,16 +1,16 @@
 body {
-  font-family:  Arial, Helvetica, sans-serif;
-  background-color: #F3F2EF;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f3f2ef;
 }
 
-a{
-color: black;
- /* text-decoration: underline; */
-/* font-size:14px */
+a {
+  color: black;
+  /* text-decoration: underline; */
+  /* font-size:14px */
 }
 
 /* default btn styling */
-.default-btn-style{
+.default-btn-style {
   background-color: transparent;
   border: 1px solid rgb(78, 78, 78);
   border-radius: 20px;
@@ -20,7 +20,7 @@ color: black;
   /* max-width: fit-content; */
 }
 
-.default-btn-style:hover{
+.default-btn-style:hover {
   background-color: rgba(212, 212, 212, 0.3);
   border: 1px solid rgb(78, 78, 78);
   cursor: pointer;
@@ -28,14 +28,12 @@ color: black;
 
 /* default styling for components */
 .brdr-linkedin {
-  border: 2px solid #E9E8E5;
+  border: 2px solid #e9e8e5;
   background-color: white;
   height: fit-content;
   border-radius: 18px;
   padding: 24px 16px;
 }
-
-
 
 /* NAVBAR NAVBAR NAVBAR   NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR    NAVBAR NAVBAR NAVBAR */
 /* vertical lign */
@@ -54,7 +52,7 @@ color: black;
 }
 
 .nav-icons small {
-  color: #B1B1B1;
+  color: #b1b1b1;
 }
 
 .nav-icons small:hover {
@@ -69,7 +67,7 @@ color: black;
 /*  PEOPLE YPU MAY KNOW  PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW  PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW   PEOPLE YPU MAY KNOW */
 
 .brdr-linkedin h5 {
-  font-size: 18px
+  font-size: 18px;
 }
 
 .brdr-linkedin-people-you-may-know {
@@ -85,7 +83,7 @@ color: black;
   margin-left: 10px;
 }
 
-.name-company a h6{
+.name-company a h6 {
   margin-bottom: 0px;
 }
 
@@ -94,12 +92,12 @@ color: black;
 }
 
 .user-img-resize {
+  margin-left: 2px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background-color: rgb(96, 96, 122);
 }
-
 
 /* ABOUT ABOUT ABOUT */
 .overflow-height {
@@ -108,23 +106,20 @@ color: black;
   overflow: scroll;
 }
 
-
 /* AddExperiancd */
-.add-Exp{
+.add-Exp {
   text-overflow: ellipsis " [..]";
 }
 
-
-
 /* Toggle */
 
-
 .artdeco-toggle.artdeco-toggle--toggled:before {
-  box-shadow: inset 0 0 0 26px var(--color-checked),0 0 0 1px var(--transparent);
+  box-shadow: inset 0 0 0 26px var(--color-checked),
+    0 0 0 1px var(--transparent);
 }
 .artdeco-toggle:before {
   pointer-events: all;
-  transition: all 83ms cubic-bezier(.4,0,1,1);
+  transition: all 83ms cubic-bezier(0.4, 0, 1, 1);
   display: block;
   content: "";
   position: absolute;
@@ -139,11 +134,10 @@ color: black;
   box-sizing: content-box;
 }
 
-.artdeco-toggle:after, .artdeco-toggle:before {
-  top: unset!important;
+.artdeco-toggle:after,
+.artdeco-toggle:before {
+  top: unset !important;
 }
-
-
 
 /* ALL POSTS ALL POSTS ALL POSTS */
 .text-posts span {
@@ -156,8 +150,6 @@ color: black;
   border-radius: 50%;
   background-color: rgba(212, 212, 212, 0.3);
 }
-
-
 
 /* Create Post  Create Post  Create Post  Create Post  Create Post  Create Post  Create Post  Create Post  Create Post */
 .brdr-25 {
@@ -190,9 +182,9 @@ color: black;
 } */
 
 .btn-outline-secondary:hover {
-  background-color: rgba(212, 212, 212, 0.3)!important;
-  border-radius: 25px!important;
-  cursor: pointer!important;
+  background-color: rgba(212, 212, 212, 0.3) !important;
+  border-radius: 25px !important;
+  cursor: pointer !important;
   color: #656565;
 }
 
@@ -217,20 +209,20 @@ color: black;
   position: fixed;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 5;
 }
 
 .create-post-modal-main {
-  position:fixed;
+  position: fixed;
   background: white;
   width: 80%;
   height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border-radius: 25px;
   padding: 16px 24px;
 }
@@ -261,26 +253,25 @@ color: black;
 .text-area-post-modal .btn-outline-primary {
   border-color: transparent !important;
   font-weight: 600 !important;
-  color: #0468BF;
+  color: #0468bf;
 }
 
 .text-area-post-modal .btn-outline-primary:hover {
   /* also, official colour */
-  background-color: #E3F0FE;
+  background-color: #e3f0fe;
 }
-
 
 /* ALL POSTS */
 .brdr-linkedin-posts {
-  border: 2px solid #E9E8E5;
+  border: 2px solid #e9e8e5;
   background-color: white;
   height: fit-content;
   border-radius: 18px;
   margin-bottom: 20px;
 }
 
-.brdr-linkedin-posts img .special-img{
-  border-radius:0 0 18px 18px ;
+.brdr-linkedin-posts img .special-img {
+  border-radius: 0 0 18px 18px;
 }
 
 .posts-info-top {
@@ -297,4 +288,19 @@ color: black;
 
 .text-posts {
   display: flex;
+}
+
+.actuall-feed-h5 {
+  margin-left: 10px;
+  padding-left: 10px;
+  margin-bottom: 6px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.actuall-feed-h5:hover {
+  outline: none;
+  border: none;
+  background-color: rgb(224, 224, 224);
+  border-color: transparent;
 }

@@ -8,14 +8,13 @@ const UserInfoJumbotron = (props) => {
   const [userId, setUserId] = useState(props.id);
   const [user, setUser] = useState({});
 
-  
   async function getData() {
     const response = await fetch(
       `https://striveschool-api.herokuapp.com/api/profile/${userId}`,
       {
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
         },
       }
     );
@@ -63,19 +62,34 @@ const UserInfoJumbotron = (props) => {
               <Row>
                 <Col md={8}>
                   <b>
-                    <h3 style={{fontWeight: "600"}} className="mb-0">
+                    <h3 style={{ fontWeight: "600" }} className="mb-0">
                       {user.name} {user.surname}
                     </h3>
                   </b>
-                  <h5 style={{fontSize:"medium"}} className="mb-1">{user.title}</h5>
-                  <h5 style={{fontSize:"medium", color: "grey"}} className="mb-0">{user.bio}</h5>
+                  <h5 style={{ fontSize: "medium" }} className="mb-1">
+                    {user.title}
+                  </h5>
+                  <h5
+                    style={{ fontSize: "medium", color: "grey" }}
+                    className="mb-0"
+                  >
+                    {user.bio}
+                  </h5>
 
                   <Nav>
                     <Nav.Item>
-                      <Nav.Link style={{ fontSize: "14px"}} className="d-inline text-secondary pl-0 pr-0">
-                        Contact Info - 
+                      <Nav.Link
+                        style={{ fontSize: "14px" }}
+                        className="d-inline text-secondary pl-0 pr-0"
+                      >
+                        Contact Info -
                       </Nav.Link>
-                      <p className="d-inline text-secondary" style={{fontSize: "14px"}}>{user.email}</p>
+                      <p
+                        className="d-inline text-secondary"
+                        style={{ fontSize: "14px" }}
+                      >
+                        {user.email}
+                      </p>
                     </Nav.Item>
                   </Nav>
                 </Col>
@@ -92,14 +106,12 @@ const UserInfoJumbotron = (props) => {
               <Row>
                 <Nav>
                   <Nav.Item>
-                    <Nav.Link className="text-primary">
-                      22 Connections
-                    </Nav.Link>
+                    <Nav.Link className="text-primary">22 Connections</Nav.Link>
                   </Nav.Item>
                 </Nav>
               </Row>
 
-              <Row style={{marginLeft:"-25px"}}>
+              <Row style={{ marginLeft: "-25px" }}>
                 <Button
                   className="btn-primary"
                   style={{ borderRadius: "20px", marginLeft: "20px" }}
