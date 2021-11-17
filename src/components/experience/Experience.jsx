@@ -23,20 +23,13 @@ function Experience(props) {
   async function fetchUserExperience() {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${
-          userId === "me" ? "6163efdfa890cc0015cf07de" : userId
-        }/experiences`,
-        {
-          headers: {
-            authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
-        }
+        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences`
       );
 
       if (response.ok) {
         let responseJSON = await response.json();
-        setUserExperience(responseJSON.reverse());
+        console.log(responseJSON);
+        setUserExperience(responseJSON.experiences);
       }
     } catch (error) {
       console.log(error);
@@ -58,8 +51,10 @@ function Experience(props) {
 
   return (
     <>
-      <AddExperience addExperienceClosed={setAddExperienceClosed} />
-      <EditExperience experienceUpdated={setExperienceUpdated} />
+      {isExperienceAddClicked && (
+        <AddExperience addExperienceClosed={setAddExperienceClosed} />
+      )}
+        <EditExperience experienceUpdated={setExperienceUpdated} />
       <div
         className="mt-3"
         style={{
@@ -96,6 +91,7 @@ function Experience(props) {
             userExperience.map((experience) => {
               return (
                 <UserExperienceDetails
+                  key={experience._id}
                   history={props.history}
                   id={userId}
                   experience={experience}

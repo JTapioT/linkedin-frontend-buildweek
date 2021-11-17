@@ -41,8 +41,10 @@ function EditExperience(props) {
   const { id } = useParams(props);
   const { experienceId } = useParams(props);
   const history = useHistory(props);
+
   const [experience, setExperience] = useState({});
-  const [isExperienceFetched, setExperienceFetched] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+
   const [isAddMediaClicked, setAddMediaClicked] = useState(false);
   const [fileName, setFileName] = useState("Upload experience image");
   const [isFileUploaded, setFileUploaded] = useState(false);
@@ -56,19 +58,16 @@ function EditExperience(props) {
   async function uploadImage(file) {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/6163efdfa890cc0015cf07de/experiences/${experienceId}/picture`,
+        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}/picture`,
         {
           method: "POST",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
           body: file,
         }
       );
 
       if (response.ok) {
         let responseJSON = await response.json();
+        console.log("Image uploaded successfully.");
       }
     } catch (error) {
       console.log(error);
@@ -78,20 +77,14 @@ function EditExperience(props) {
   async function fetchExperience() {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${experienceId}`,
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
-        }
+        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`
       );
 
       if (response.ok) {
         let responseJSON = await response.json();
+        console.log(responseJSON);
         setExperience(responseJSON);
-        console.log("EXPERIENCE FETCHED!!");
-        setExperienceFetched(true);
+        console.log(experience);
       }
     } catch (error) {
       console.log(error);
@@ -100,14 +93,15 @@ function EditExperience(props) {
 
   async function editExperience(body) {
     try {
+      console.log(experience._id);
+      console.log(experienceId);
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${experienceId}`,
+        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
+            // Authorization, token should be in headers or body?
           },
           body: JSON.stringify(body),
         }
@@ -129,19 +123,18 @@ function EditExperience(props) {
 
   async function deleteExperience() {
     try {
+      console.log(experience._id);
+      console.log(experienceId);
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${experienceId}`,
+        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
         }
       );
 
       if (response.ok) {
-        let responseJSON = await response.json();
+        await response.json();
+        console.log("deleted experience.");
       }
     } catch (error) {
       console.log(error);
@@ -152,8 +145,9 @@ function EditExperience(props) {
     fetchExperience();
   }, []);
 
-  useEffect(() => {}, [isExperienceFetched]);
-
+  useEffect(() => {
+    setLoading(false);
+  }, [experience]);
 
   const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
     initialValues: {
@@ -182,233 +176,235 @@ function EditExperience(props) {
           className="mt-5 modal-body"
           style={{ backgroundColor: "white" }}
         >
-          { isExperienceFetched && (
-          <>
-          <h4 className="text-center">Edit Experience</h4>
-          <Row className="justify-content-center">
-            <Col md={10}>
-              <div>
-                <div className="add-Exp">
-                  <Form onSubmit={handleSubmit}>
-                    <Row>
-                      <Col md={10}>
-                        <div>
-                          <h6>Notify Network</h6>
-                          <small>
-                            Turn on to notify your network. Job change updates
-                            can take up to 2 hours.{" "}
-                            <a
-                              className="app-aware-link"
-                              target="_blank"
-                              href="https://www.linkedin.com/help/linkedin/answer/86236"
-                            >
-                              {/**/}Learn more{/**/}
-                            </a>{" "}
-                          </small>
+        { !isLoading && (
+            <>
+              <h4 className="text-center">Edit Experience</h4>
+              <Row className="justify-content-center">
+                <Col md={10}>
+                  <div>
+                    <div className="add-Exp">
+                      <Form onSubmit={handleSubmit}>
+                        <Row>
+                          <Col md={10}>
+                            <div>
+                              <h6>Notify Network</h6>
+                              <small>
+                                Turn on to notify your network. Job change
+                                updates can take up to 2 hours.{" "}
+                                <a
+                                  className="app-aware-link"
+                                  target="_blank"
+                                  href="https://www.linkedin.com/help/linkedin/answer/86236"
+                                >
+                                  {/**/}Learn more{/**/}
+                                </a>{" "}
+                              </small>
 
-                          <BootstrapSwitchButton
-                            checked={true}
-                            onstyle="success"
-                            size="xs"
-                            className="default-btn-style"
+                              <BootstrapSwitchButton
+                                checked={true}
+                                onstyle="success"
+                                size="xs"
+                                className="default-btn-style"
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                        <Form.Group controlId="FormRole">
+                          <Form.Label>Title*</Form.Label>
+                          <Form.Control
+                            isInvalid={errors.role}
+                            value={values.role}
+                            onChange={handleChange}
+                            name="role"
+                            placeholder="Ex: Retail Sales Manger"
+                          />
+                          <FormControl.Feedback
+                            type={errors.role ? "invalid" : "valid"}
+                          ></FormControl.Feedback>
+                        </Form.Group>
+                        <a
+                          className="app-aware-link"
+                          target="_blank"
+                          href="https://www.linkedin.com/help/linkedin/answer/86236"
+                        >
+                          {/**/}Learn more{/**/}
+                        </a>
+                        <Form.Group controlId="FormCompanyName">
+                          <Form.Label>Company name*</Form.Label>
+                          <Form.Control
+                            isInvalid={errors.company}
+                            value={values.company}
+                            onChange={handleChange}
+                            name="company"
+                            placeholder="Ex: Microsoft"
+                          />
+                        </Form.Group>
+                        <Form.Group controlId="FormLocation">
+                          <Form.Label>Location*</Form.Label>
+                          <Form.Control
+                            isInvalid={errors.area}
+                            value={values.area}
+                            onChange={handleChange}
+                            name="area"
+                            placeholder="Ex:London United Kingdom"
+                          />
+                          <FormControl.Feedback
+                            type={errors.area ? "invalid" : "valid"}
+                          ></FormControl.Feedback>
+                        </Form.Group>
+                        <div
+                          className="d-flex justify-content-between"
+                          style={{ width: "300px" }}
+                        >
+                          <p className="mr-2">Start date*</p>
+
+                          <DayPickerInput
+                            parseDate={parseDate}
+                            onDayChange={(
+                              selectedDay,
+                              modifiers,
+                              dayPickerInput
+                            ) => {
+                              const input = dayPickerInput.getInput();
+                              setStartDate(input.value);
+                            }}
+                            placeholder={`${formatDate(
+                              new Date(experience.startDate)
+                            )}`}
                           />
                         </div>
-                      </Col>
-                    </Row>
-                    <Form.Group controlId="FormRole">
-                      <Form.Label>Title*</Form.Label>
-                      <Form.Control
-                        isInvalid={errors.role}
-                        value={values.role}
-                        onChange={handleChange}
-                        name="role"
-                        placeholder="Ex: Retail Sales Manger"
-                      />
-                      <FormControl.Feedback
-                        type={errors.role ? "invalid" : "valid"}
-                      ></FormControl.Feedback>
-                    </Form.Group>
-                    <a
-                      className="app-aware-link"
-                      target="_blank"
-                      href="https://www.linkedin.com/help/linkedin/answer/86236"
-                    >
-                      {/**/}Learn more{/**/}
-                    </a>
-                    <Form.Group controlId="FormCompanyName">
-                      <Form.Label>Company name*</Form.Label>
-                      <Form.Control
-                        isInvalid={errors.company}
-                        value={values.company}
-                        onChange={handleChange}
-                        name="company"
-                        placeholder="Ex: Microsoft"
-                      />
-                    </Form.Group>
-                    <Form.Group controlId="FormLocation">
-                      <Form.Label>Location*</Form.Label>
-                      <Form.Control
-                        isInvalid={errors.area}
-                        value={values.area}
-                        onChange={handleChange}
-                        name="area"
-                        placeholder="Ex:London United Kingdom"
-                      />
-                      <FormControl.Feedback
-                        type={errors.area ? "invalid" : "valid"}
-                      ></FormControl.Feedback>
-                    </Form.Group>
-                    <div
-                      className="d-flex justify-content-between"
-                      style={{ width: "300px" }}
-                    >
-                      <p className="mr-2">Start date*</p>
-
-                      <DayPickerInput
-                        parseDate={parseDate}
-                        onDayChange={(
-                          selectedDay,
-                          modifiers,
-                          dayPickerInput
-                        ) => {
-                          const input = dayPickerInput.getInput();
-                          setStartDate(input.value);
-                        }}
-                        placeholder={`${formatDate(
-                          new Date(experience.startDate)
-                        )}`}
-                      />
-                    </div>
-                    <div
-                      className="d-flex justify-content-between"
-                      style={{ width: "300px" }}
-                    >
-                      <p className="mr-2">End date*</p>
-                      <DayPickerInput
-                        parseDate={parseDate}
-                        onDayChange={(
-                          selectedDay,
-                          modifiers,
-                          dayPickerInput
-                        ) => {
-                          const input = dayPickerInput.getInput();
-                          setEndDate(input.value === "" ? null : input.value);
-                        }}
-                        placeholder={`${formatDate(
-                          new Date(experience.endDate)
-                        )}`}
-                      />
-                    </div>
-                    <Form.Group controlId="FormDescription">
-                      <Form.Label>Description*</Form.Label>
-                      <Form.Control
-                        as="textarea"
-                        rows={3}
-                        isInvalid={errors.description}
-                        value={values.description}
-                        onChange={handleChange}
-                        name="description"
-                      />
-                      <FormControl.Feedback
-                        type={errors.description ? "invalid" : "valid"}
-                      >
-                        Description is needed!
-                      </FormControl.Feedback>
-                    </Form.Group>
-                    <Form.Label>Media</Form.Label>
-                    <Form.Label>
-                      Add or link to external documents, photos, sites, videos,
-                      and presentations.
-                      <a
-                        className="app-aware-link"
-                        target="_blank"
-                        href="https://www.linkedin.com/help/linkedin/answer/86236"
-                      >
-                        {/**/}Learn more{/**/}
-                      </a>
-                    </Form.Label>
-                    <Button
-                      className="default-btn-style ml-2"
-                      variant="outline-primary"
-                      onClick={() => {
-                        setAddMediaClicked(true);
-                      }}
-                    >
-                      {" "}
-                      + Add Media
-                    </Button>{" "}
-                    {isAddMediaClicked && (
-                      <Form.Group>
-                        <FormFile
-                          type="file"
-                          id="experienceImageUpload"
-                          label={fileName}
-                          onChange={(e) => {
-                            setFileName(e.target.files[0].name);
-                            setFileUploaded(true);
-                            formData.append("experience", e.target.files[0]);
-                            setFile(formData);
+                        <div
+                          className="d-flex justify-content-between"
+                          style={{ width: "300px" }}
+                        >
+                          <p className="mr-2">End date*</p>
+                          <DayPickerInput
+                            parseDate={parseDate}
+                            onDayChange={(
+                              selectedDay,
+                              modifiers,
+                              dayPickerInput
+                            ) => {
+                              const input = dayPickerInput.getInput();
+                              setEndDate(
+                                input.value === "" ? null : input.value
+                              );
+                            }}
+                            placeholder={`${formatDate(
+                              new Date(experience.endDate)
+                            )}`}
+                          />
+                        </div>
+                        <Form.Group controlId="FormDescription">
+                          <Form.Label>Description*</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            rows={3}
+                            isInvalid={errors.description}
+                            value={values.description}
+                            onChange={handleChange}
+                            name="description"
+                          />
+                          <FormControl.Feedback
+                            type={errors.description ? "invalid" : "valid"}
+                          >
+                            Description is needed!
+                          </FormControl.Feedback>
+                        </Form.Group>
+                        <Form.Label>Media</Form.Label>
+                        <Form.Label>
+                          Add or link to external documents, photos, sites,
+                          videos, and presentations.
+                          <a
+                            className="app-aware-link"
+                            target="_blank"
+                            href="https://www.linkedin.com/help/linkedin/answer/86236"
+                          >
+                            {/**/}Learn more{/**/}
+                          </a>
+                        </Form.Label>
+                        <Button
+                          className="default-btn-style ml-2"
+                          variant="outline-primary"
+                          onClick={() => {
+                            setAddMediaClicked(true);
                           }}
-                          custom
-                          style={{ width: "30vw" }}
-                        ></FormFile>
-                      </Form.Group>
-                    )}
-                    {editSubmitted && (
-                      <Alert variant={"success"} className="mt-5">
-                        <h6>Information successfully submitted!</h6>
-                      </Alert>
-                    )}
-                    <div className="mt-5 d-flex justify-content-around align-items-baseline">
-                      <Button
-                        className="default-btn-style"
-                        variant="primary"
-                        type="submit"
-                        disabled={isValid ? false : true}
-                        style={{ color: "blue" }}
-                      >
-                        Save
-                      </Button>
-                      <p
-                        className="text-muted p-0 m-0"
-                        type="button"
-                        style={{ fontSize: "1.1em" }}
-                        onClick={() => {
-                          deleteExperience();
-                          alert("User experience deleted!");
-                          /* history.push(`/profile/${id}`); */
-                        }}
-                      >
-                        Delete experience
-                      </p>
-                      <Button
-                        data-dismiss="modal"
-                        className="default-btn-style"
-                        variant="outline-primary"
-                        type="button"
-                        onClick={() => {
-                          history.push(`/profile/${id}`);
-                          /*  history.go(); */
-                        }}
-                      >
-                        Close
-                      </Button>
+                        >
+                          {" "}
+                          + Add Media
+                        </Button>{" "}
+                        {isAddMediaClicked && (
+                          <Form.Group>
+                            <FormFile
+                              type="file"
+                              id="experienceImageUpload"
+                              label={fileName}
+                              onChange={(e) => {
+                                setFileName(e.target.files[0].name);
+                                setFileUploaded(true);
+                                formData.append(
+                                  "experience",
+                                  e.target.files[0]
+                                );
+                                setFile(formData);
+                              }}
+                              custom
+                              style={{ width: "30vw" }}
+                            ></FormFile>
+                          </Form.Group>
+                        )}
+                        {editSubmitted && (
+                          <Alert variant={"success"} className="mt-5">
+                            <h6>Information successfully submitted!</h6>
+                          </Alert>
+                        )}
+                        <div className="mt-5 d-flex justify-content-around align-items-baseline">
+                          <Button
+                            className="default-btn-style"
+                            variant="primary"
+                            type="submit"
+                            disabled={isValid ? false : true}
+                            style={{ color: "blue" }}
+                          >
+                            Save
+                          </Button>
+                          <p
+                            className="text-muted p-0 m-0"
+                            type="button"
+                            style={{ fontSize: "1.1em" }}
+                            onClick={() => {
+                              deleteExperience();
+                              alert("User experience deleted!");
+                              /* history.push(`/profile/${id}`); */
+                            }}
+                          >
+                            Delete experience
+                          </p>
+                          <Button
+                            data-dismiss="modal"
+                            className="default-btn-style"
+                            variant="outline-primary"
+                            type="button"
+                            onClick={() => {
+                              history.push(`/profile/${id}`);
+                              /*  history.go(); */
+                            }}
+                          >
+                            Close
+                          </Button>
+                        </div>
+                      </Form>
                     </div>
-                  </Form>
-                </div>
-              </div>
-            </Col>
-          </Row>
-          </>
-          )} 
-          { !isExperienceFetched && (
-            <Spinner animation="border" />
-          )
-          }
+                  </div>
+                </Col>
+              </Row>
+            </>
+          )}
+        {isLoading && <Spinner animation="border" />}
         </Container>
       </div>
     </>
-  )
+  );
 }
 
 export default EditExperience;

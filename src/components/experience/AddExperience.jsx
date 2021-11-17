@@ -48,14 +48,9 @@ function AddExperience(props) {
 
   async function uploadImage(experienceId, file) {
     try {
-      let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/6163efdfa890cc0015cf07de/experiences/${experienceId}/picture`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}/picture`,
         {
           method: "POST",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
           body: file,
         }
       );
@@ -63,7 +58,7 @@ function AddExperience(props) {
       if (response.ok) {
         let responseData = await response.json();
         console.log(responseData);
-        uploadImage(responseData._id, formData)
+        ///uploadImage(responseData._id, formData)
       }
     } catch (error) {
       console.log(error);
@@ -74,14 +69,11 @@ function AddExperience(props) {
   
   async function submitData(body, file) {
     try {
-      let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
           },
           body: JSON.stringify(body),
         }
@@ -89,7 +81,6 @@ function AddExperience(props) {
 
       if (response.ok) {
         let responseJSON = await response.json();
-        console.log(responseJSON);
         if(isFileUploaded) {
           uploadImage(responseJSON._id,file)
         }

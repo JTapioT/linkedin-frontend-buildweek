@@ -7,34 +7,18 @@ const PeopleYouMayKnow = (props) => {
 
   async function fetchUsers() {
 
-    try {
+  try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile`,
-        {
-          headers: {
-            authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
-        }
+        `https://linkedin-buildweek.herokuapp.com/profile?limit=5`,
       );
 
       if(response.ok) {
-        let responseJson = await response.json()
-        console.log(responseJson)
-
-        const users = responseJson.map((selectedUser, index) => {
-          if(index < 5) {
-            return selectedUser
-          }
-        }).filter(Boolean)
-
-        setSelectedUsers(users)
-        console.log(selectedUsers)
-
+        let responseJson = await response.json();
+        setSelectedUsers(responseJson.profile);
       }
-    } catch(error) {
-      console.log(error);
-    }
+  } catch(error) {
+    console.log(error)
+  }
   }
 
   useEffect(() => {
