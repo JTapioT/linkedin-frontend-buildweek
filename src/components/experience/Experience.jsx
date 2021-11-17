@@ -89,6 +89,7 @@ function Experience(props) {
             userExperience.map((experience) => {
               return (
                 <UserExperienceDetails
+                  key={experience._id}
                   history={props.history}
                   id={userId}
                   experience={experience}
