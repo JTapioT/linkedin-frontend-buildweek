@@ -22,8 +22,8 @@ function FeedLayout(props) {
             <Row>
               <Col className="w-100">
                 {/* INSERT HERE THE COMPONENTS */}
-                <CreatePost/>
-                <AllPosts history={props.history}/>
+                <CreatePost {...props} />
+                <AllPosts history={props.history} />
               </Col>
             </Row>
           </Col>
