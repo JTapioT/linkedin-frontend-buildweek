@@ -25,23 +25,12 @@ class AllPosts extends React.Component {
 
       // receive only the first 10
       if (response.ok) {
-        const allPosts = responseJson.posts
-          .map((eachPost, index) => {
-            if (index < 3) {
-              return eachPost;
-            }
-          })
-          .filter(Boolean);
         const ourPosts = responseJson.posts.filter(
-          (post) => post.username === "striveschool"
+          (post) => post.user._id === "619243e70ad215f6f722ce30"
         );
-        const posts = [...allPosts, ...ourPosts];
-        console.log(posts);
+        ourPosts.reverse();
 
-        // put these into state
-        this.setState({ posts: posts });
-        console.log("posts -" + posts);
-        console.log("state -" + this.state.posts);
+        this.setState({ posts: ourPosts });
       }
     } catch (e) {
       console.log(e);

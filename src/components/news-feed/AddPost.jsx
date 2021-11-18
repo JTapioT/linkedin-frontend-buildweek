@@ -47,11 +47,9 @@ class AddPost extends React.Component {
         {
           method: "POST",
           body: JSON.stringify(this.state.body),
-          /*  headers: {
+          headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
-          }, */
+          },
           //   body: JSON.stringify({ text: formData }),
         }
       );
@@ -62,20 +60,23 @@ class AddPost extends React.Component {
         console.log(postData);
 
         console.log("here my new data", formData.getAll("post"));
-
-        const imageUpload = await fetch(
-          `https://linkedin-buildweek.herokuapp.com/posts/${postData._id}/uploadPic`,
-          /*  `https://striveschool-api.herokuapp.com/api/posts/${postData._id}`, */
-          {
-            body: formData,
-            method: "POST",
-            /* headers: {
+        if (formData.getAll("post")) {
+          const imageUpload = await fetch(
+            `https://linkedin-buildweek.herokuapp.com/posts/${postData._id}/uploadPic`,
+            /*  `https://striveschool-api.herokuapp.com/api/posts/${postData._id}`, */
+            {
+              body: formData,
+              method: "POST",
+              /* headers: {
               Authorization:
                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTY4MTFkNTZmMGM3MTAwMTUwZWE2YmUiLCJpYXQiOjE2MzQyMTAyNjEsImV4cCI6MTYzNTQxOTg2MX0.kpbIrgfWZiaf6lYYxY0jpxTc7d9vdqW4BhDRcKqJwE0",
             }, */
-            //   body: JSON.stringify({ text: formData }),
-          }
-        );
+              //   body: JSON.stringify({ text: formData }),
+            }
+          );
+        } else {
+          console.log("No formData available");
+        }
       } else {
         console.log("something went wrong");
       }
