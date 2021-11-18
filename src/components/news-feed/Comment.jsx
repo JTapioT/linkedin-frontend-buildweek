@@ -57,7 +57,7 @@ const Comment = (props) => {
       </div>
       <div>
         {comment.map((post) => (
-          <Row>
+          <Row class>
             <Col className="col-2">
               <img
                 style={{
@@ -66,11 +66,23 @@ const Comment = (props) => {
                   height: "50px",
                   marginLeft: "3px",
                 }}
-                src="https://images.unsplash.com/photo-1637160967945-6d1ee20d67c9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=688&q=80"
+                src={post.userId.image}
                 alt=""
               />
             </Col>
-            <Col>{post.comment}</Col>
+            <Col className="commentUser ">
+              <div>
+                <h6 style={{ paddingBottom: "0px", marginTop: "7px" }}>
+                  {`${post.userId.name}  ${post.userId.surname}`}{" "}
+                </h6>
+                <span className="text-muted" style={{ fontSize: "0.9rem" }}>
+                  {post.userId.title}
+                </span>
+              </div>
+              <div>
+                <p>{post.comment}</p>
+              </div>
+            </Col>
           </Row>
         ))}
       </div>
