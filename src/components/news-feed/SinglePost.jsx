@@ -114,13 +114,18 @@ class SinglePost extends React.Component {
           <Row>
             <Col>
               {this.state.showComment && (
-                <Comment postId={this.props.post._id} />
+                <Comment
+                  postId={this.props.post._id}
+                  userId={this.props.post.user._id}
+                  image={this.props.post.user.image}
+                />
               )}
             </Col>
           </Row>
         </div>
         <DeletePost
           show={this.state.show}
+          postId={this.props.post._id}
           postInfo={this.props.post}
           handleClose={this.hideModal}
           history={this.props.history}

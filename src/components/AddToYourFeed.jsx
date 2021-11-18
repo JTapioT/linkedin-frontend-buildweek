@@ -10,13 +10,7 @@ const AddToYourFeed = () => {
   async function fetchUsers() {
     try {
       let response = await fetch(
-        `//striveschool-api.herokuapp.com/api/posts/`,
-        {
-          headers: {
-            authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
-          },
-        }
+        `https://linkedin-buildweek.herokuapp.com/posts/`
       );
 
       if (response.ok) {
@@ -94,7 +88,14 @@ const AddToYourFeed = () => {
                 : null}
 
               <div>
-                <a href="#" style={{color: "black", textDecoration: "underline", fontSize:"14px"}}>
+                <a
+                  href="#"
+                  style={{
+                    color: "black",
+                    textDecoration: "underline",
+                    fontSize: "14px",
+                  }}
+                >
                   View all recomendations
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -164,34 +165,34 @@ const AddToYourFeed = () => {
           <Col className="ml-4" md={12}>
             <div className="mt-3 d-flex flex-column">
               <div className="d-flex justify-content-between">
-              <Link style={{ color: "black" }}>
-                <small>About</small>
-              </Link>
-              <Link style={{ color: "black" }}>
-                <small>Accessibility</small>
-              </Link>
-              <Link style={{ color: "black" }}>
-                <small>Help Centre</small>
-              </Link>
+                <Link style={{ color: "black" }}>
+                  <small>About</small>
+                </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Accessibility</small>
+                </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Help Centre</small>
+                </Link>
               </div>
               <div className="d-flex justify-content-between mt-2">
-              <Link style={{ color: "black" }}>
-                <small>Privacy & Terms</small>
-              </Link>
-              <Link style={{ color: "black" }}>
-                <small>Ad Choices</small>
-              </Link>
-              <Link style={{ color: "black" }}>
-                <small>Advertising</small>
-              </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Privacy & Terms</small>
+                </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Ad Choices</small>
+                </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Advertising</small>
+                </Link>
               </div>
               <div className="d-flex justify-content-between mt-2">
-              <Link style={{ color: "black" }}>
-                <small>Business Services</small>
-              </Link>
-              <Link style={{ color: "black" }}>
-                <small>Get the LinkedIn app</small>
-              </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Business Services</small>
+                </Link>
+                <Link style={{ color: "black" }}>
+                  <small>Get the LinkedIn app</small>
+                </Link>
               </div>
               <Link style={{ color: "black", marginTop: ".5em" }}>
                 <small>More</small>
@@ -237,9 +238,7 @@ const AddToYourFeed = () => {
           </Col>
         </Row>
         <Row>
-          <Col md={3}>
-
-          </Col>
+          <Col md={3}></Col>
         </Row>
       </div>
     </>

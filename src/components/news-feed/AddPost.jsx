@@ -39,7 +39,7 @@ class AddPost extends React.Component {
   postToBeAdded = async () => {
     let formData = new FormData();
     formData.append("post", this.state.image);
-
+    console.log("BODY", this.state.body);
     try {
       let response = await fetch(
         `https://linkedin-buildweek.herokuapp.com/posts/` +
@@ -57,7 +57,7 @@ class AddPost extends React.Component {
       if (response.ok) {
         alert("posted");
         const postData = await response.json();
-        console.log(postData);
+        console.log("HERE IS THE POSTDATA", postData);
 
         console.log("here my new data", formData.getAll("post"));
         if (formData.getAll("post")) {

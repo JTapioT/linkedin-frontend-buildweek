@@ -26,7 +26,7 @@ class AllPosts extends React.Component {
       // receive only the first 10
       if (response.ok) {
         const ourPosts = responseJson.posts.filter(
-          (post) => post.user._id === "619243e70ad215f6f722ce30"
+          (post) => post.user._id === "619647f7fffa097d09ede238"
         );
         ourPosts.reverse();
 

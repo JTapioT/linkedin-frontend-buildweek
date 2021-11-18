@@ -1,28 +1,55 @@
+import { useState } from "react";
 import { Dropdown, Button, Form } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
 
-const DeletePost = ({ show, postInfo, handleClose, history, props }) => {
+const DeletePost = ({ show, postInfo, handleClose, history, postId }) => {
   const showHideClassName = show
     ? "create-post-modal display-block"
     : "create-post-modal display-none";
-  const { userId } = useParams(props);
-  console.log(userId);
+  /*  const { postId } = useParams(props);
+  console.log(postId); */
+  const [postUpdate, setPostUpdate] = useState(postInfo.text);
 
   const deleteData = async () => {
     try {
       const response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/posts/${userId}`,
+        `https://linkedin-buildweek.herokuapp.com/posts/${postId}`,
         {
           method: "DELETE",
         }
       );
       if (response.ok) {
         alert("data deleted successfully");
-        history.push("/feed/619243e70ad215f6f722ce30");
+        history.push("/feed/619647f7fffa097d09ede238");
         history.go();
       }
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const editPost = async () => {
+    console.log(postUpdate);
+    try {
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/posts/${postId}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(postUpdate),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        /* setPostUpdate() */
+        /* window.location.assign("/feed/"); */
+        console.log("post successfully edited");
+      } else {
+        console.log("something went wrong!!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   // console.log(postInfo)
@@ -89,7 +116,10 @@ const DeletePost = ({ show, postInfo, handleClose, history, props }) => {
               rows={5}
               style={{ border: "none" }}
               placeholder="What do you want to talk about?"
-              defaultValue={postInfo.text}
+              value={postUpdate}
+              onChange={(e) => {
+                setPostUpdate(e.target.value);
+              }}
             />
           </Form.Group>
           <Button variant="outline-primary">Add Hashtag</Button>
@@ -190,11 +220,15 @@ const DeletePost = ({ show, postInfo, handleClose, history, props }) => {
           </div>
 
           <Button
+            type="submit"
             variant="primary"
             className="btn-primary rounded-pill"
             style={{ width: "70px" }}
+            onClick={() => {
+              editPost();
+            }}
           >
-            Post
+            Edit
           </Button>
 
           <Button
