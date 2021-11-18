@@ -1,36 +1,66 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const PeopleYouMayKnow = (props) => {
-
-  const [selectedUsers, setSelectedUsers] = useState([])
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   async function fetchUsers() {
-
-  try {
+    try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile?limit=5`,
+        `https://linkedin-buildweek.herokuapp.com/profile/`,
+        {
+          /*headers: {
+            authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
+          },*/
+        }
       );
 
-      if(response.ok) {
+      if (response.ok) {
+        let responseJson = await response.json();
+        console.log(responseJson);
+
+        const users = responseJson
+          .map((selectedUser, index) => {
+            if (index < 5) {
+              return selectedUser;
+            }
+          })
+          .filter(Boolean);
+
+        setSelectedUsers(users);
+        console.log(selectedUsers);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+    try {
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/profile?limit=5`
+      );
+
+      if (response.ok) {
         let responseJson = await response.json();
         setSelectedUsers(responseJson.profile);
       }
-  } catch(error) {
-    console.log(error)
-  }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
     fetchUsers();
-  }, [])
+  }, []);
 
+  return (
+    <div
+      className="brdr-linkedin brdr-linked-people-you-may-know"
+      style={{ height: "auto" }}
+    >
+      <h5>People You May Know</h5>
 
-    return(
-      <div className= "brdr-linkedin brdr-linked-people-you-may-know" style={{height:"auto"}}>
-        <h5>People You May Know</h5>
-
-        {/* {
+      {/* {
           NOTE: didn't know how to display it while the content is loading
           ________________________________________________________________
         {/* <div className="who-and-where mb-4">
@@ -51,28 +81,34 @@ const PeopleYouMayKnow = (props) => {
           </div>
         </div> */}
 
-        {
-          selectedUsers.length ? 
-          selectedUsers.map(user => {
-            return  ( 
+      {selectedUsers.length
+        ? selectedUsers.map((user) => {
+            return (
               <div className="who-and-where mb-4">
                 <div className="d-inline">
-                <img src={user.image} className="user-img-resize"/>
+                  <img src={user.image} className="user-img-resize" />
+                </div>
+                <div className="name-company">
+                  <Link
+                    onClick={() => {
+                      props.history.push(`/profile/${user._id}`);
+                      props.history.go();
+                    }}
+                    className="text-dark"
+                  >
+                    <h6>
+                      {user.name} {user.surname}
+                    </h6>
+                  </Link>
+                  <p className="text-muted mb-1">{user.title}</p>
+                  <div className="default-btn-style">Connect</div>
+                </div>
               </div>
-              <div className="name-company">
-                <Link onClick={() => {props.history.push(`/profile/${user._id}`); props.history.go()}} className="text-dark">
-                  <h6>{user.name} {user.surname}</h6>
-                </Link>
-                <p className="text-muted mb-1">{user.title}</p>
-                  <div className="default-btn-style">
-                  Connect
-                  </div>
-              </div>
-            </div>)
-          }) : null
-        }
-      </div>
-    )
-}
+            );
+          })
+        : null}
+    </div>
+  );
+};
 
 export default PeopleYouMayKnow;
