@@ -34,6 +34,19 @@ const PeopleYouMayKnow = (props) => {
     } catch (error) {
       console.log(error);
     }
+
+    try {
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/profile?limit=5`
+      );
+
+      if (response.ok) {
+        let responseJson = await response.json();
+        setSelectedUsers(responseJson.profile);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {

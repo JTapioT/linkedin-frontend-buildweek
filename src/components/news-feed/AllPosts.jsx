@@ -11,13 +11,13 @@ class AllPosts extends React.Component {
   componentDidMount = async () => {
     try {
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/",
-        {
+        "https://linkedin-buildweek.herokuapp.com/posts"
+        /* {
           headers: {
             authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
           },
-        }
+        } */
       );
       let responseJson = await response.json();
       // displays all posts
@@ -25,23 +25,12 @@ class AllPosts extends React.Component {
 
       // receive only the first 10
       if (response.ok) {
-        const allPosts = responseJson
-          .map((eachPost, index) => {
-            if (index < 3) {
-              return eachPost;
-            }
-          })
-          .filter(Boolean);
-        const ourPosts = responseJson.filter(
-          (post) => post.username === "rashuHiremath"
+        const ourPosts = responseJson.posts.filter(
+          (post) => post.user._id === "619243e70ad215f6f722ce30"
         );
-        const posts = [...allPosts, ...ourPosts];
-        console.log(posts);
+        ourPosts.reverse();
 
-        // put these into state
-        this.setState({ posts: posts });
-        console.log("posts -" + posts);
-        console.log("state -" + this.state.posts);
+        this.setState({ posts: ourPosts });
       }
     } catch (e) {
       console.log(e);

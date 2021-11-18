@@ -51,8 +51,10 @@ function Experience(props) {
 
   return (
     <>
-      <AddExperience addExperienceClosed={setAddExperienceClosed} />
-      <EditExperience experienceUpdated={setExperienceUpdated} />
+      {isExperienceAddClicked && (
+        <AddExperience addExperienceClosed={setAddExperienceClosed} />
+      )}
+        <EditExperience experienceUpdated={setExperienceUpdated} />
       <div
         className="mt-3"
         style={{
@@ -89,6 +91,7 @@ function Experience(props) {
             userExperience.map((experience) => {
               return (
                 <UserExperienceDetails
+                  key={experience._id}
                   history={props.history}
                   id={userId}
                   experience={experience}

@@ -84,6 +84,7 @@ function EditExperience(props) {
         let responseJSON = await response.json();
         console.log(responseJSON);
         setExperience(responseJSON);
+        console.log(experience);
       }
     } catch (error) {
       console.log(error);
@@ -92,6 +93,8 @@ function EditExperience(props) {
 
   async function editExperience(body) {
     try {
+      console.log(experience._id);
+      console.log(experienceId);
       let response = await fetch(
         `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`,
         {
@@ -120,6 +123,8 @@ function EditExperience(props) {
 
   async function deleteExperience() {
     try {
+      console.log(experience._id);
+      console.log(experienceId);
       let response = await fetch(
         `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`,
         {

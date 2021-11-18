@@ -14,10 +14,10 @@ function App() {
     <>
       <BrowserRouter>
         <Route
-          path="/feed"
+          path="/feed/:userId"
           render={(props) => (
             <>
-              <MyNavBar/>
+              <MyNavBar />
               <FeedLayout {...props} />
               <Footer />
             </>

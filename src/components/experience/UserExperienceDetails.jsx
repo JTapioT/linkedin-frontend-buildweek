@@ -17,6 +17,7 @@ function UserExperienceDetails({ history, id, experience }) {
   };
 
   return (
+    <>
     <div key={experience._id} className="d-flex" onMouseOver={() =>{ setDetailsHover(true)}} onMouseLeave={() => {setDetailsHover(false)}}>
       <div className="mr-3 mt-2">
         <img
@@ -68,6 +69,7 @@ function UserExperienceDetails({ history, id, experience }) {
         ></i>
       </div>
     </div>
+    </>
   );
 }
 export default UserExperienceDetails;
