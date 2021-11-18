@@ -48,7 +48,7 @@ function AddExperience(props) {
 
   async function uploadImage(experienceId, file) {
     try {
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}/picture`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experienceId}/picture`,
         {
           method: "POST",
           body: file,
@@ -69,7 +69,7 @@ function AddExperience(props) {
   
   async function submitData(body, file) {
     try {
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/`,
         {
           method: "POST",
           headers: {
@@ -161,7 +161,7 @@ function AddExperience(props) {
                       />
                       <FormControl.Feedback
                         type={errors.role ? "invalid" : "valid"}
-                      ></FormControl.Feedback>
+                      >Title is needed</FormControl.Feedback>
                     </Form.Group>
                     <a
                       className="app-aware-link"
@@ -178,7 +178,9 @@ function AddExperience(props) {
                         onChange={handleChange}
                         name="company"
                         placeholder="Ex: Microsoft"
-                      />
+                      /><FormControl.Feedback
+                        type={errors.company ? "invalid" : "valid"}
+                      >Company is needed</FormControl.Feedback>
                     </Form.Group>
                     <Form.Group controlId="FormLocation">
                       <Form.Label>Location</Form.Label>
@@ -191,7 +193,7 @@ function AddExperience(props) {
                       />
                       <FormControl.Feedback
                         type={errors.area ? "invalid" : "valid"}
-                      ></FormControl.Feedback>
+                      >Area is needed</FormControl.Feedback>
                     </Form.Group>
                     <div
                       className="d-flex justify-content-between"
@@ -245,7 +247,7 @@ function AddExperience(props) {
                       />
                       <FormControl.Feedback
                         type={errors.description ? "invalid" : "valid"}
-                      ></FormControl.Feedback>
+                      >Description is needed</FormControl.Feedback>
                     </Form.Group>
                     <Form.Label>Media</Form.Label>
                     <Form.Label>

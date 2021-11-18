@@ -41,7 +41,6 @@ function EditExperience(props) {
   const { id } = useParams(props);
   const { experienceId } = useParams(props);
   const history = useHistory(props);
-
   const [experience, setExperience] = useState({});
   const [isLoading, setLoading] = useState(true);
 
@@ -49,16 +48,15 @@ function EditExperience(props) {
   const [fileName, setFileName] = useState("Upload experience image");
   const [isFileUploaded, setFileUploaded] = useState(false);
   const [file, setFile] = useState(null);
-  const [startDate, setStartDate] = useState(experience.startDate);
-  const [endDate, setEndDate] = useState(experience.endDate);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [editSubmitted, setSubmitted] = useState(false);
 
   let formData = new FormData();
 
   async function uploadImage(file) {
     try {
-      let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}/picture`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}/picture`,
         {
           method: "POST",
           body: file,
@@ -66,7 +64,7 @@ function EditExperience(props) {
       );
 
       if (response.ok) {
-        let responseJSON = await response.json();
+        //let responseJSON = await response.json();
         console.log("Image uploaded successfully.");
       }
     } catch (error) {
@@ -76,15 +74,14 @@ function EditExperience(props) {
 
   async function fetchExperience() {
     try {
-      let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experienceId}`
       );
 
       if (response.ok) {
-        let responseJSON = await response.json();
-        console.log(responseJSON);
-        setExperience(responseJSON);
-        console.log(experience);
+        let data = await response.json();
+        console.log(data);
+        setExperience(data);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -94,24 +91,22 @@ function EditExperience(props) {
   async function editExperience(body) {
     try {
       console.log(experience._id);
-      console.log(experienceId);
-      let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            // Authorization, token should be in headers or body?
           },
           body: JSON.stringify(body),
         }
       );
 
-      if (isFileUploaded) {
-        uploadImage(file);
-      }
-
+      
       if (response.ok) {
+        if (isFileUploaded) {
+          uploadImage(file);
+        }
+
         let responseJSON = await response.json();
         console.log(responseJSON);
         setSubmitted(true);
@@ -125,8 +120,7 @@ function EditExperience(props) {
     try {
       console.log(experience._id);
       console.log(experienceId);
-      let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences/${experienceId}`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
         {
           method: "DELETE",
         }
@@ -141,24 +135,16 @@ function EditExperience(props) {
     }
   }
 
-  useEffect(() => {
-    fetchExperience();
-  }, []);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [experience]);
-
   const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
-    initialValues: {
-      role: experience.role,
-      company: experience.company,
-      description: experience.description,
-      area: experience.area,
-      startDate: startDate,
-      endDate: endDate,
-    },
     enableReinitialize: true,
+    initialValues: {
+      role: experience.role || "",
+      company:experience.company || "",
+      description: experience.description || "",
+      area: experience.area || "",
+      startDate: experience.startDate || "",
+      endDate: experience.endDate || "",
+    },
     onSubmit: (values) => {
       editExperience(values, file);
       alert(JSON.stringify(values));
@@ -169,6 +155,23 @@ function EditExperience(props) {
     validationSchema: validationSchema,
   });
 
+  useEffect(() => {
+    console.log(values);
+    fetchExperience();
+  }, []);
+
+  useEffect(() => {
+    values.role = experience.role;
+    values.company = experience.company;
+    values.description = experience.description;
+    values.area = experience.area;
+    setStartDate(experience.startDate);
+    setEndDate(experience.endDate);
+    setLoading(false);
+  }, [experience]);
+
+
+
   return (
     <>
       <div className="modal" id="editExperienceModal" data-backdrop="static">
@@ -176,7 +179,7 @@ function EditExperience(props) {
           className="mt-5 modal-body"
           style={{ backgroundColor: "white" }}
         >
-        { !isLoading && (
+          {!isLoading && (
             <>
               <h4 className="text-center">Edit Experience</h4>
               <Row className="justify-content-center">
@@ -220,7 +223,9 @@ function EditExperience(props) {
                           />
                           <FormControl.Feedback
                             type={errors.role ? "invalid" : "valid"}
-                          ></FormControl.Feedback>
+                          >
+                            Title is needed.
+                          </FormControl.Feedback>
                         </Form.Group>
                         <a
                           className="app-aware-link"
@@ -238,6 +243,11 @@ function EditExperience(props) {
                             name="company"
                             placeholder="Ex: Microsoft"
                           />
+                          <FormControl.Feedback
+                            type={errors.company? "invalid" : "valid"}
+                          >
+                            Company is needed.
+                          </FormControl.Feedback>
                         </Form.Group>
                         <Form.Group controlId="FormLocation">
                           <Form.Label>Location*</Form.Label>
@@ -250,7 +260,9 @@ function EditExperience(props) {
                           />
                           <FormControl.Feedback
                             type={errors.area ? "invalid" : "valid"}
-                          ></FormControl.Feedback>
+                          >
+                            Area is needed.
+                          </FormControl.Feedback>
                         </Form.Group>
                         <div
                           className="d-flex justify-content-between"
@@ -400,7 +412,7 @@ function EditExperience(props) {
               </Row>
             </>
           )}
-        {isLoading && <Spinner animation="border" />}
+          {isLoading && <Spinner animation="border" />}
         </Container>
       </div>
     </>

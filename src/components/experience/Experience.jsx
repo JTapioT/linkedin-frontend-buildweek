@@ -23,7 +23,7 @@ function Experience(props) {
   async function fetchUserExperience() {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/619243e70ad215f6f722ce30/experiences`
+        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences`
       );
 
       if (response.ok) {
