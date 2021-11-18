@@ -8,6 +8,7 @@ class EditProfile extends React.Component {
     user: {},
     isFileUploaded: false,
     fileName: null,
+    file: null,
     formData: new FormData(),
     dataFetched: false,
   };
@@ -16,16 +17,17 @@ class EditProfile extends React.Component {
   handleShow = () => this.setState({ ...this.state, show: true });
 
   uploadImage = async (formData) => {
+    console.log("i am post image");
     console.log(formData);
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.state.userId}/picture`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${this.state.userId}/picture`,
         {
           method: "POST",
-          headers: {
+          /*headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
-          },
+          }*/
           body: this.state.formData,
         }
       );
@@ -40,14 +42,16 @@ class EditProfile extends React.Component {
   };
 
   getData = async () => {
+    console.log("i am edit get");
     const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${this.state.userId}`,
+      `https://linkedin-buildweek.herokuapp.com/profile/${this.state.userId}`
+      /*,
       {
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
         },
-      }
+      }*/
     );
     const userDatajson = await response.json();
     const userData = {
@@ -64,16 +68,16 @@ class EditProfile extends React.Component {
   };
 
   updateData = async () => {
-    console.log("i am updateData");
+    console.log("i am update");
     try {
       const resp = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${this.state.userId}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
+            //Authorization:
+            //"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTYzZWZkZmE4OTBjYzAwMTVjZjA3ZGUiLCJpYXQiOjE2MzM5Mzk0MjMsImV4cCI6MTYzNTE0OTAyM30.HvEFLHymbCxV8ciPWBxaABNQ2NmFcOxsgJ8xi1Hkmuk",
           },
           body: JSON.stringify(this.state.user),
         }

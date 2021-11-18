@@ -304,3 +304,12 @@ a {
   background-color: rgb(224, 224, 224);
   border-color: transparent;
 }
+
+.commentUser {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 7px;
+  background-color: rgb(221, 221, 221);
+  border-radius: 25px;
+  margin-right: 25px;
+}
