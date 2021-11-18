@@ -9,7 +9,7 @@ const NewsFeedProfile = () => {
   const FetchProfileDetails = async () => {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/`
+        `https://linkedin-buildweek.herokuapp.com/profile/`
       );
       let data = await response.json();
       if (response.ok) {
@@ -24,22 +24,25 @@ const NewsFeedProfile = () => {
   };
 
   useEffect(() => {
-    
     FetchProfileDetails();
   }, []);
 
   return (
     <>
-     <div style={{width: "100%"}}>
-        <Row >
+      <div style={{ width: "100%" }}>
+        <Row>
           <Col>
             <Card style={{ width: "100%" }} className="brdr-linkedin">
-              <Card.Img variant="top" src="https://wl-brightside.cf.tsp.li/resize/728x/jpg/0bb/959/ba16a05fa7b18c5f21767d2b1c.jpg" />
+              <Card.Img
+                variant="top"
+                src="https://wl-brightside.cf.tsp.li/resize/728x/jpg/0bb/959/ba16a05fa7b18c5f21767d2b1c.jpg"
+              />
               <Card.Body>
                 <Card.Title>
-                    <Link to="/profile/me">
-                <Card.Link >Welcome !</Card.Link> <br /> <small>Add a photo</small>
-                </Link>
+                  <Link to="/profile/me">
+                    <Card.Link>Welcome !</Card.Link> <br />{" "}
+                    <small>Add a photo</small>
+                  </Link>
                 </Card.Title>
                 <Card.Text>
                   connection <br /> Grow your network
@@ -71,7 +74,7 @@ const NewsFeedProfile = () => {
           </Col>
         </Row>
         <Row className="mt-3">
-          <Col >
+          <Col>
             <Card style={{ width: "100%" }} className="brdr-linkedin">
               <Card.Body>
                 <ListGroup className="list-group-flush">
@@ -103,7 +106,7 @@ const NewsFeedProfile = () => {
             </Card>
           </Col>
         </Row>
-        </div>
+      </div>
     </>
   );
 };

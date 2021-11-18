@@ -10,13 +10,13 @@ const UserInfoJumbotron = (props) => {
 
   async function getData() {
     const response = await fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${userId}`,
-      {
+      `https://linkedin-buildweek.herokuapp.com/profile/${userId}`
+      /*{
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
         },
-      }
+      }*/
     );
     const userProfile = await response.json();
 
