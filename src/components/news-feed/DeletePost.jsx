@@ -35,7 +35,7 @@ const DeletePost = ({ show, postInfo, handleClose, history, postId }) => {
         `https://linkedin-buildweek.herokuapp.com/posts/${postId}`,
         {
           method: "PUT",
-          body: JSON.stringify(postUpdate),
+          body: JSON.stringify({ text: postUpdate }),
           headers: {
             "Content-Type": "application/json",
           },

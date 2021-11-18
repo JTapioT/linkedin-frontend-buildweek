@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const NewsFeedProfile = () => {
   const [myProfile, SetMyProfile] = useState([]);
+  console.log("myprofile", myProfile);
 
   const FetchProfileDetails = async () => {
     try {
@@ -13,8 +14,8 @@ const NewsFeedProfile = () => {
       );
       let data = await response.json();
       if (response.ok) {
-        console.log("here", data);
-        SetMyProfile(data.data);
+        console.log("here is data for news", data);
+        SetMyProfile(data);
       } else {
         console.log("something went wrong");
       }
@@ -34,8 +35,9 @@ const NewsFeedProfile = () => {
           <Col>
             <Card style={{ width: "100%" }} className="brdr-linkedin">
               <Card.Img
+                /*  https://wl-brightside.cf.tsp.li/resize/728x/jpg/0bb/959/ba16a05fa7b18c5f21767d2b1c.jpg */
                 variant="top"
-                src="https://wl-brightside.cf.tsp.li/resize/728x/jpg/0bb/959/ba16a05fa7b18c5f21767d2b1c.jpg"
+                src={myProfile.profile[0].image}
               />
               <Card.Body>
                 <Card.Title>

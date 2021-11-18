@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Dropdown, Modal } from "react-bootstrap";
+import SingleComment from "./SingleComment";
 
 const Comment = (props) => {
   const [comment, setComment] = useState([]);
@@ -92,34 +93,12 @@ const Comment = (props) => {
         </Form>
       </div>
       <div>
-        {comment.map((post) => (
-          <Row class>
-            <Col className="col-2">
-              <img
-                style={{
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  marginLeft: "3px",
-                }}
-                src={post.userId.image}
-                alt=""
-              />
-            </Col>
-            <Col className="commentUser ">
-              <div>
-                <h6 style={{ paddingBottom: "0px", marginTop: "7px" }}>
-                  {`${post.userId.name}  ${post.userId.surname}`}{" "}
-                </h6>
-                <span className="text-muted" style={{ fontSize: "0.9rem" }}>
-                  {post.userId.title}
-                </span>
-              </div>
-              <div>
-                <p>{post.comment}</p>
-              </div>
-            </Col>
-          </Row>
+        {comment.map((postComment) => (
+          <SingleComment
+            postComment={postComment}
+
+            /*  userId={props.userId} */
+          />
         ))}
       </div>
     </>

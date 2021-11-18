@@ -118,6 +118,7 @@ class SinglePost extends React.Component {
                   postId={this.props.post._id}
                   userId={this.props.post.user._id}
                   image={this.props.post.user.image}
+                  /* comment={this.props.post.comment._id} */
                 />
               )}
             </Col>
