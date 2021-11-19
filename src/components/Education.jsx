@@ -52,7 +52,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQN8N4YnhLMO6FkPytNF-iFVJr04xgusYSQA&usqp=CAU"
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Fah0Coj3Jkd3m4US7WhCM2359wa-8TTApg&usqp=CAU"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
