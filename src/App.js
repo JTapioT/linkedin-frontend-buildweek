@@ -1,7 +1,7 @@
 import MyNavBar from "./components/MyNavBar";
 import Layout from "./components/Layout";
 import Footer from "./components/Footer";
-import { BrowserRouter, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, useParams } from "react-router-dom";
 import AddExperience from "./components/experience/AddExperience";
 import EditExperience from "./components/experience/EditExperience";
 import NewsFeedProfile from "./components/NewsFeedProfile";
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Route exact path="/">
+        <Route path="/">
           <Redirect to="/feed/me" />
         </Route>
         <Route
