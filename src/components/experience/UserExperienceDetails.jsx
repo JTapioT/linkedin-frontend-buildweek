@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import EditExperience from "./EditExperience";
 
 function UserExperienceDetails({ history, id, experience }) {
   const [penHover, setPenHover] = useState(false);
@@ -69,6 +69,7 @@ function UserExperienceDetails({ history, id, experience }) {
         ></i>
       </div>
     </div>
+     <EditExperience experienceId={experience._id}/>
     </>
   );
 }

@@ -38,34 +38,61 @@ function EditExperience(props) {
       .required("Location is required"),
   });
 
+  const initialValues = {
+    role: "",
+    company: "",
+    description: "",
+    area: "",
+    startDate: "",
+    endDate: "",
+  };
+
+  const {
+    values,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+    errors,
+    isValid,
+    setValues,
+  } = useFormik({
+    enableReinitialize: true,
+
+    initialValues: initialValues,
+
+    onSubmit: (values) => {
+      editExperience(values, file);
+      alert(JSON.stringify(values));
+      setSubmitted(true);
+      history.push(`/profile/${id}`);
+      props.experienceUpdated(true);
+    },
+    validationSchema: validationSchema,
+  });
+
   const { id } = useParams(props);
   const { experienceId } = useParams(props);
   const history = useHistory(props);
-  const [experience, setExperience] = useState({});
-  const [isLoading, setLoading] = useState(true);
 
+  const [isLoading, setLoading] = useState(true);
   const [isAddMediaClicked, setAddMediaClicked] = useState(false);
   const [fileName, setFileName] = useState("Upload experience image");
   const [isFileUploaded, setFileUploaded] = useState(false);
   const [file, setFile] = useState(null);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [editSubmitted, setSubmitted] = useState(false);
 
-  let formData = new FormData();
+  const formData = new FormData();
 
   async function uploadImage(file) {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}/picture`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}/picture`,
         {
           method: "POST",
           body: file,
         }
       );
-
       if (response.ok) {
-        //let responseJSON = await response.json();
         console.log("Image uploaded successfully.");
       }
     } catch (error) {
@@ -76,14 +103,24 @@ function EditExperience(props) {
   async function fetchExperience() {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experienceId}`
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}`
       );
 
       if (response.ok) {
         let data = await response.json();
-        console.log(data);
-        setExperience(data);
-        setLoading(false);
+        // Comes through as expected.
+        // console.log(data);
+
+        setValues({
+          role: data.role,
+          company: data.company,
+          description: data.description,
+          area: data.area,
+          startDate: data.startDate.substring(0, 10),
+          endDate: data.endDate ? data.endDate.substring(0, 10) : null,
+        });
+
+        //setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -92,9 +129,8 @@ function EditExperience(props) {
 
   async function editExperience(body) {
     try {
-      console.log(experience._id);
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}`,
         {
           method: "PUT",
           headers: {
@@ -120,17 +156,13 @@ function EditExperience(props) {
 
   async function deleteExperience() {
     try {
-      console.log(experience._id);
-      console.log(experienceId);
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}`,
         {
           method: "DELETE",
         }
       );
-
       if (response.ok) {
-        await response.json();
         console.log("deleted experience.");
       }
     } catch (error) {
@@ -138,40 +170,19 @@ function EditExperience(props) {
     }
   }
 
-  const { values, handleChange, handleSubmit, errors, isValid } = useFormik({
-    enableReinitialize: true,
-    initialValues: {
-      role: experience.role || "",
-      company: experience.company || "",
-      description: experience.description || "",
-      area: experience.area || "",
-      startDate: experience.startDate || "",
-      endDate: experience.endDate || "",
-    },
-    onSubmit: (values) => {
-      editExperience(values, file);
-      alert(JSON.stringify(values));
-      setSubmitted(true);
-      history.push(`/profile/${id}`);
-      props.experienceUpdated(true);
-    },
-    validationSchema: validationSchema,
-  });
+  /* https://github.com/formium/formik/issues/811
+  On every render, Formik would have to do a deep equals of those initialValues to make sure they are referentially equal. Since this is such a common pattern, Formik skips these checks by default and provides a simple opt-in to these checks, enableReinitialize.
+
+  After opting in, you can get your initialValues from anywhere, but that anywhere has to trigger a render in React, which eventually comes down to Props or a Hook, whether a library-provided hook like Relay or Redux, or the result of a setState or dispatch when manually calling an API.
+  */
 
   useEffect(() => {
-    console.log(values);
     fetchExperience();
-  }, []);
+  }, [props.experienceId]);
 
   useEffect(() => {
-    values.role = experience.role;
-    values.company = experience.company;
-    values.description = experience.description;
-    values.area = experience.area;
-    setStartDate(experience.startDate);
-    setEndDate(experience.endDate);
     setLoading(false);
-  }, [experience]);
+  }, [values]);
 
   return (
     <>
@@ -272,6 +283,7 @@ function EditExperience(props) {
                           <p className="mr-2">Start date*</p>
 
                           <DayPickerInput
+                            name={"startDate"}
                             parseDate={parseDate}
                             onDayChange={(
                               selectedDay,
@@ -279,10 +291,10 @@ function EditExperience(props) {
                               dayPickerInput
                             ) => {
                               const input = dayPickerInput.getInput();
-                              setStartDate(input.value);
+                              setFieldValue("startDate", input.value);
                             }}
                             placeholder={`${formatDate(
-                              new Date(experience.startDate)
+                              new Date(initialValues.startDate)
                             )}`}
                           />
                         </div>
@@ -299,12 +311,10 @@ function EditExperience(props) {
                               dayPickerInput
                             ) => {
                               const input = dayPickerInput.getInput();
-                              setEndDate(
-                                input.value === "" ? null : input.value
-                              );
+                              setFieldValue("startDate", input.value || null);
                             }}
                             placeholder={`${formatDate(
-                              new Date(experience.endDate)
+                              new Date(initialValues.endDate)
                             )}`}
                           />
                         </div>
