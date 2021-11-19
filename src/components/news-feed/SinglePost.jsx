@@ -9,6 +9,24 @@ class SinglePost extends React.Component {
     showComment: false,
   };
 
+  /* 
+  const [likes, setLikes] = useState(defaultLikes)
+  const likePost = likes.includes(me)
+
+  const multiTask = () => {
+        addLike()
+      if(likePost){
+          setLikes(likes.filter(id => id !== me))
+      } else{
+          setLikes([...likes, me])
+      }
+      onChange&&onChange(likes)
+  }
+
+  useEffect(() => {
+      onChange&&onChange(likes);
+    },[likePost])
+ */
   showModal = () => {
     this.setState({ show: true });
   };

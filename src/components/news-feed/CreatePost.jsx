@@ -6,6 +6,7 @@ import AddPost from "./AddPost";
 class CreatePost extends Component {
   state = {
     show: false,
+    userInfo: {},
   };
 
   showModal = () => {
@@ -16,6 +17,27 @@ class CreatePost extends Component {
     this.setState({ show: false });
   };
 
+  getData = async () => {
+    let response = await fetch(
+      `https://linkedin-buildweek.herokuapp.com/profile/` +
+        process.env.REACT_APP_USER
+      /*{
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTk0ZGRhMGMxODE5NjAwMTU0ZjI5OTgiLCJpYXQiOjE2MzcxNDYwMTYsImV4cCI6MTYzODM1NTYxNn0.GNoplRQQVFS4xepzQsDn2xo1i3p7V3rZ4f5ayPPyv3I",
+        },
+      }*/
+    );
+    let userProfile = await response.json();
+    console.log(userProfile);
+
+    this.setState({ ...this.state, userInfo: userProfile });
+  };
+
+  componentDidMount = async () => {
+    this.getData();
+  };
+
   render() {
     return (
       <>
@@ -24,7 +46,14 @@ class CreatePost extends Component {
           style={{ width: "540px", height: "120px" }}
         >
           <div className="create-post-flex">
-            <div className="user-img-resize"></div>
+            <div>
+              <img
+                style={{ borderRadius: "50%", width: "40px", height: "40px" }}
+                src={this.state.userInfo.image}
+                alt=""
+              />
+            </div>
+
             <Button
               variant="outline-secondary"
               className="brdr-25 text-left"
