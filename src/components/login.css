@@ -1,0 +1,33 @@
+#logingPage {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.Login {
+  position: absolute;
+  top: 30%;
+  width: 400px;
+}
+
+.logins {
+  display: flex;
+}
+
+.logins img {
+  width: 100%;
+  margin-top: 10px;
+  height: 50px;
+}
+.logins a {
+  width: 50%;
+  padding: 10px;
+}
+
+
+.LoginButtons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+  }
