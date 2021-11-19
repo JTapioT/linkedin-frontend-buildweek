@@ -10,7 +10,9 @@ const UserInfoJumbotron = (props) => {
 
   async function getData() {
     const response = await fetch(
-      `https://linkedin-buildweek.herokuapp.com/profile/${userId}`
+      `https://linkedin-buildweek.herokuapp.com/profile/${
+        userId === "me" ? process.env.REACT_APP_USER : userId
+      }`
       /*{
         headers: {
           Authorization:
@@ -53,7 +55,7 @@ const UserInfoJumbotron = (props) => {
               borderTopLeftRadius: "18px",
               borderTopRightRadius: "18px",
             }}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDc0O3fcrVTpsTEMikVqUoY6ykCb3Bu66miw&usqp=CAU"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKOGKW05-ex-bsvBF4tMDEX7WuI5Z6Wr-RJw&usqp=CAU"
           />
 
           <Row>
@@ -135,8 +137,9 @@ const UserInfoJumbotron = (props) => {
                   className="default-btn-style"
                   style={{ marginLeft: "5px" }}
                   variant="outline-secondary"
+                  href={`https://linkedin-buildweek.herokuapp.com/profile/${userId}/PDF`}
                 >
-                  More
+                  Profile PDF
                 </Button>
               </Row>
             </Card.Text>

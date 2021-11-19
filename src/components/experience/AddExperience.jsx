@@ -48,7 +48,7 @@ function AddExperience(props) {
 
   async function uploadImage(experienceId, file) {
     try {
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experienceId}/picture`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${experienceId}/picture`,
         {
           method: "POST",
           body: file,
