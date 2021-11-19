@@ -10,23 +10,22 @@ const AddToYourFeed = () => {
   async function fetchUsers() {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/posts/`
+        `https://linkedin-buildweek.herokuapp.com/profile/`
       );
 
       if (response.ok) {
         let responseJson = await response.json();
         console.log(responseJson);
 
-        const users = responseJson
+        /*  const users = responseJson
           .map((selectedUser, index) => {
             if (index < 3) {
               return selectedUser;
             }
           })
-          .filter(Boolean);
+          .filter(Boolean); */
 
-        setSelectedUsers(users);
-        console.log(selectedUsers);
+        setSelectedUsers(responseJson.profile);
       }
     } catch (error) {
       console.log(error);
@@ -47,45 +46,40 @@ const AddToYourFeed = () => {
               style={{ width: "320px", height: "auto" }}
             >
               <h5>add to your feed</h5>
-              {selectedUsers.length
-                ? selectedUsers.map((user) => {
-                    return (
-                      <div className="who-and-where mb-4">
-                        <div className="d-inline">
-                          <img
-                            src={user.user.image}
-                            className="user-img-resize"
-                          />
-                        </div>
-                        <div className="name-company">
-                          <Link
-                            to={`/profile/${user._id}`}
-                            className="text-dark"
-                            style={{ textDecoration: "none" }}
-                          >
-                            <h6>{user.user.username} </h6>
-                          </Link>
+              {selectedUsers.map((user) => {
+                return (
+                  <div className="who-and-where mb-4">
+                    <div className="d-inline">
+                      <img src={user.image} className="user-img-resize" />
+                    </div>
+                    <div className="name-company">
+                      <Link
+                        to={`/profile/${user._id}`}
+                        className="text-dark"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <h6>{user.username} </h6>
+                      </Link>
 
-                          <p className="text-muted mb-1">{user.user.title}</p>
+                      <p className="text-muted mb-1">{user.title}</p>
 
-                          <div className="default-btn-style">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={16}
-                              height={16}
-                              fill="currentColor"
-                              className="bi bi-plus"
-                              viewBox="0 0 16 16"
-                            >
-                              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                            </svg>
-                            Follow
-                          </div>
-                        </div>
+                      <div className="default-btn-style">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width={16}
+                          height={16}
+                          fill="currentColor"
+                          className="bi bi-plus"
+                          viewBox="0 0 16 16"
+                        >
+                          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        Follow
                       </div>
-                    );
-                  })
-                : null}
+                    </div>
+                  </div>
+                );
+              })}
 
               <div>
                 <a

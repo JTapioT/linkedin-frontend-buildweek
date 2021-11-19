@@ -56,7 +56,8 @@ function EditExperience(props) {
 
   async function uploadImage(file) {
     try {
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}/picture`,
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}/picture`,
         {
           method: "POST",
           body: file,
@@ -74,7 +75,8 @@ function EditExperience(props) {
 
   async function fetchExperience() {
     try {
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experienceId}`
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experienceId}`
       );
 
       if (response.ok) {
@@ -91,7 +93,8 @@ function EditExperience(props) {
   async function editExperience(body) {
     try {
       console.log(experience._id);
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
         {
           method: "PUT",
           headers: {
@@ -101,7 +104,6 @@ function EditExperience(props) {
         }
       );
 
-      
       if (response.ok) {
         if (isFileUploaded) {
           uploadImage(file);
@@ -120,7 +122,8 @@ function EditExperience(props) {
     try {
       console.log(experience._id);
       console.log(experienceId);
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
+      let response = await fetch(
+        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/${experience._id}`,
         {
           method: "DELETE",
         }
@@ -139,7 +142,7 @@ function EditExperience(props) {
     enableReinitialize: true,
     initialValues: {
       role: experience.role || "",
-      company:experience.company || "",
+      company: experience.company || "",
       description: experience.description || "",
       area: experience.area || "",
       startDate: experience.startDate || "",
@@ -169,8 +172,6 @@ function EditExperience(props) {
     setEndDate(experience.endDate);
     setLoading(false);
   }, [experience]);
-
-
 
   return (
     <>
@@ -244,7 +245,7 @@ function EditExperience(props) {
                             placeholder="Ex: Microsoft"
                           />
                           <FormControl.Feedback
-                            type={errors.company? "invalid" : "valid"}
+                            type={errors.company ? "invalid" : "valid"}
                           >
                             Company is needed.
                           </FormControl.Feedback>

@@ -4,13 +4,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const NewsFeedProfile = () => {
-  const [myProfile, SetMyProfile] = useState([]);
-  console.log("myprofile", myProfile);
+  const [myProfile, SetMyProfile] = useState({});
+
+  console.log("myProfile", myProfile);
 
   const FetchProfileDetails = async () => {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/`
+        `https://linkedin-buildweek.herokuapp.com/profile/` +
+          process.env.REACT_APP_USER
       );
       let data = await response.json();
       if (response.ok) {
@@ -37,7 +39,7 @@ const NewsFeedProfile = () => {
               <Card.Img
                 /*  https://wl-brightside.cf.tsp.li/resize/728x/jpg/0bb/959/ba16a05fa7b18c5f21767d2b1c.jpg */
                 variant="top"
-                src={myProfile.profile[0].image}
+                src={myProfile.image}
               />
               <Card.Body>
                 <Card.Title>
