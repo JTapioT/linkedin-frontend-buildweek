@@ -8,14 +8,17 @@ import NewsFeedProfile from "./components/NewsFeedProfile";
 import AddToYourFeed from "./components/AddToYourFeed";
 import FeedLayout from "./components/FeedLayout";
 import AddPost from "./components/news-feed/AddPost";
+import Switch from "react-bootstrap/esm/Switch";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Route path="/">
+      <Switch>
+        <Route exact path="/">
           <Redirect to="/feed/me" />
         </Route>
+      </Switch>
         <Route
           path="/feed/:userId"
           render={(props) => (
