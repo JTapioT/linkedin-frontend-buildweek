@@ -69,7 +69,7 @@ function UserExperienceDetails({ history, id, experience }) {
         ></i>
       </div>
     </div>
-     <EditExperience experienceId={experience._id}/>
+    <EditExperience experienceId={experience._id}/>
     </>
   );
 }

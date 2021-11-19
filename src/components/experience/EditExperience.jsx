@@ -65,13 +65,14 @@ function EditExperience(props) {
       alert(JSON.stringify(values));
       setSubmitted(true);
       history.push(`/profile/${id}`);
+      history.go();
       props.experienceUpdated(true);
     },
     validationSchema: validationSchema,
   });
 
   const { id } = useParams(props);
-  const { experienceId } = useParams(props);
+  //const { experienceId } = useParams(props);
   const history = useHistory(props);
 
   const [isLoading, setLoading] = useState(true);
@@ -398,7 +399,7 @@ function EditExperience(props) {
                             onClick={() => {
                               deleteExperience();
                               alert("User experience deleted!");
-                              /* history.push(`/profile/${id}`); */
+                              history.push(`/profile/${id}`);
                             }}
                           >
                             Delete experience
@@ -410,7 +411,7 @@ function EditExperience(props) {
                             type="button"
                             onClick={() => {
                               history.push(`/profile/${id}`);
-                              /*  history.go(); */
+                              //history.go();
                             }}
                           >
                             Close
