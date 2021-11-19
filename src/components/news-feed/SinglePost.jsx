@@ -2,6 +2,7 @@ import DeletePost from "./DeletePost";
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import Comment from "./Comment";
+import BlogLike from "./likes";
 
 class SinglePost extends React.Component {
   state = {
@@ -88,10 +89,13 @@ class SinglePost extends React.Component {
           <Row style={{ paddingLeft: "10px", paddingTop: "2px" }}>
             <Col className="px-0 ">
               <b>
-                <button className="btn btn-primary actuall-feed-h5">
-                  <i className="bi text-muted bi-hand-thumbs-up"></i>&nbsp;{" "}
-                  <span className="text-muted">Like</span>
-                </button>{" "}
+                {
+                  <BlogLike
+                    defaultLikes={["1"]}
+                    onChange={console.log}
+                    postId={this.props.post._id}
+                  />
+                }
               </b>
             </Col>
             <Col className="px-0 ">
