@@ -69,7 +69,7 @@ function AddExperience(props) {
   
   async function submitData(body, file) {
     try {
-      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences/`,
+      let response = await fetch(`https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/`,
         {
           method: "POST",
           headers: {
@@ -105,9 +105,10 @@ function AddExperience(props) {
       startDate: "",
       endDate: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, {resetForm}) => {
       submitData(values, file);
       alert(JSON.stringify(values));
+      resetForm();
     },
     validationSchema: validationSchema,
   });

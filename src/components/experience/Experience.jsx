@@ -23,7 +23,7 @@ function Experience(props) {
   async function fetchUserExperience() {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/process.env.REACT_APP_USER/experiences`
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences`
       );
 
       if (response.ok) {
@@ -54,7 +54,7 @@ function Experience(props) {
       {isExperienceAddClicked && (
         <AddExperience addExperienceClosed={setAddExperienceClosed} />
       )}
-        <EditExperience experienceUpdated={setExperienceUpdated} />
+      <EditExperience experienceUpdated={setExperienceUpdated} />
       <div
         className="mt-3"
         style={{
@@ -68,7 +68,14 @@ function Experience(props) {
         }}
       >
         <div className="d-flex justify-content-between align-items-center">
-          <h5>Experience</h5>
+          <div className="d-flex">
+            <h5>Experience</h5>
+            <a
+              href={`https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/CSV`}
+            >
+              <i class="bi bi-arrow-down-circle ml-2"></i>
+            </a>
+          </div>
           <i
             className="bi bi-plus-lg"
             data-toggle="modal"
@@ -82,7 +89,7 @@ function Experience(props) {
             }}
             onClick={() => {
               setExperienceClicked(true);
-              props.history.push(`/profile/${userId}/edit/forms/position/new`);
+              /* props.history.push(`/profile/${userId}/edit/forms/position/new`); */
             }}
           ></i>
         </div>
