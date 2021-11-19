@@ -54,7 +54,7 @@ function Experience(props) {
       {isExperienceAddClicked && (
         <AddExperience addExperienceClosed={setAddExperienceClosed} />
       )}
-      <EditExperience experienceUpdated={setExperienceUpdated} />
+     
       <div
         className="mt-3"
         style={{

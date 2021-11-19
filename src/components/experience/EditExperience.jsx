@@ -18,7 +18,6 @@ import { formatDate, parseDate } from "react-day-picker/moment";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-
 function EditExperience(props) {
   const validationSchema = yup.object().shape({
     role: yup
@@ -48,26 +47,32 @@ function EditExperience(props) {
     endDate: "",
   };
 
-   const { values, setFieldValue, handleChange, handleSubmit, errors, isValid, setValues } =
-    useFormik({
-      enableReinitialize: true,
+  const {
+    values,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+    errors,
+    isValid,
+    setValues,
+  } = useFormik({
+    enableReinitialize: true,
 
-      initialValues: initialValues,
+    initialValues: initialValues,
 
-      onSubmit: (values) => {
-        editExperience(values, file);
-        alert(JSON.stringify(values));
-        setSubmitted(true);
-        history.push(`/profile/${id}`);
-        props.experienceUpdated(true);
-      },
-      validationSchema: validationSchema,
-    });
+    onSubmit: (values) => {
+      editExperience(values, file);
+      alert(JSON.stringify(values));
+      setSubmitted(true);
+      history.push(`/profile/${id}`);
+      props.experienceUpdated(true);
+    },
+    validationSchema: validationSchema,
+  });
 
   const { id } = useParams(props);
   const { experienceId } = useParams(props);
   const history = useHistory(props);
-
 
   const [isLoading, setLoading] = useState(true);
   const [isAddMediaClicked, setAddMediaClicked] = useState(false);
@@ -81,7 +86,7 @@ function EditExperience(props) {
   async function uploadImage(file) {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${experienceId}/picture`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}/picture`,
         {
           method: "POST",
           body: file,
@@ -98,7 +103,7 @@ function EditExperience(props) {
   async function fetchExperience() {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${experienceId}`
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}`
       );
 
       if (response.ok) {
@@ -111,13 +116,11 @@ function EditExperience(props) {
           company: data.company,
           description: data.description,
           area: data.area,
-          startDate: data.startDate.substring(0, 10),
+          startDate: data.startDate.substring(0,10),
           endDate: data.endDate ? data.endDate.substring(0, 10) : null,
         });
 
         //setLoading(false);
-        console.log("loading");
-
       }
     } catch (error) {
       console.log(error);
@@ -127,7 +130,7 @@ function EditExperience(props) {
   async function editExperience(body) {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${experienceId}`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}`,
         {
           method: "PUT",
           headers: {
@@ -154,7 +157,7 @@ function EditExperience(props) {
   async function deleteExperience() {
     try {
       let response = await fetch(
-        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${experienceId}`,
+        `https://linkedin-buildweek.herokuapp.com/profile/${process.env.REACT_APP_USER}/experiences/${props.experienceId}`,
         {
           method: "DELETE",
         }
@@ -173,18 +176,13 @@ function EditExperience(props) {
   After opting in, you can get your initialValues from anywhere, but that anywhere has to trigger a render in React, which eventually comes down to Props or a Hook, whether a library-provided hook like Relay or Redux, or the result of a setState or dispatch when manually calling an API.
   */
 
-  // will return all Formik state and helpers directly
- 
-
-
   useEffect(() => {
     fetchExperience();
-  }, []);
+  }, [props.experienceId]);
 
   useEffect(() => {
     setLoading(false);
-  }, [values])
-
+  }, [values]);
 
   return (
     <>
@@ -293,9 +291,7 @@ function EditExperience(props) {
                               dayPickerInput
                             ) => {
                               const input = dayPickerInput.getInput();
-                              setFieldValue(
-                                "startDate", input.value
-                              );
+                              setFieldValue("startDate", input.value);
                             }}
                             placeholder={`${formatDate(
                               new Date(initialValues.startDate)
@@ -315,9 +311,7 @@ function EditExperience(props) {
                               dayPickerInput
                             ) => {
                               const input = dayPickerInput.getInput();
-                                setFieldValue(
-                                "startDate", input.value || null
-                              );
+                              setFieldValue("startDate", input.value || null);
                             }}
                             placeholder={`${formatDate(
                               new Date(initialValues.endDate)
