@@ -22,7 +22,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "http://www.floorepoxyindustrial.com/images/colorchart/medium-gray.jpg"
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE-dzF_L5Qn2v5USjNvT_GG_JX6-PpzIpqkw&usqp=CAU"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
@@ -34,10 +34,14 @@ function Education() {
             style={{ borderBottom: "0.5px solid #ccc", paddingBottom: "1em" }}
           >
             <div className="d-flex flex-column justify-content-between">
-              <h5 className="m-0">Strive School</h5>
-              <p className="m-0">Coding school to become wizard in coding</p>
+              <h5 className="m-0">Front End</h5>
+              <p className="m-0">React</p>
               <small className="m-0 text-muted">2021 - 2022</small>
-              <p className="m-0 mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione ab maiores ipsam mollitia reprehenderit dignissimos.</p>
+              <p className="m-0 mt-4">
+                Front-end web development is the development of the graphical
+                user interface of a website, through the use of HTML, CSS, and
+                JavaScript,
+              </p>
             </div>
             <i class="bi bi-pencil" style={{ fontSize: "20px" }}></i>
           </div>
@@ -48,7 +52,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "http://www.floorepoxyindustrial.com/images/colorchart/medium-gray.jpg"
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQN8N4YnhLMO6FkPytNF-iFVJr04xgusYSQA&usqp=CAU"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
@@ -60,12 +64,15 @@ function Education() {
             style={{ borderBottom: "0.5px solid #ccc", paddingBottom: "1em" }}
           >
             <div className="d-flex flex-column justify-content-between">
-              <h5 className="m-0">Strive School</h5>
-              <p className="m-0">Coding school to become wizard in coding</p>
+              <h5 className="m-0">Backend</h5>
+              <p className="m-0">Mongoose </p>
               <small className="m-0 text-muted">2021 - 2022</small>
-              <p className="m-0 mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione ab maiores ipsam mollitia reprehenderit dignissimos.</p>
+              <p className="m-0 mt-4">
+                the terms frontend and backend refer to the separation of
+                concerns between the presentation layer (
+              </p>
             </div>
-           {/*  <i class="bi bi-pencil" style={{ fontSize: "20px" }}></i> */}
+            {/*  <i class="bi bi-pencil" style={{ fontSize: "20px" }}></i> */}
           </div>
         </div>
         {/* Education detail row ends */}
@@ -74,7 +81,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "http://www.floorepoxyindustrial.com/images/colorchart/medium-gray.jpg"
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYw9N2x9zWPyMwmFtOTpnota72vUzy2rEi5Q&usqp=CAU"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
@@ -86,12 +93,16 @@ function Education() {
             style={{ borderBottom: "0.5px solid #ccc", paddingBottom: "1em" }}
           >
             <div className="d-flex flex-column justify-content-between">
-              <h5 className="m-0">Strive School</h5>
-              <p className="m-0">Coding school to become wizard in coding</p>
+              <h5 className="m-0">Full Stack</h5>
+              <p className="m-0">React , ExpressJS, Node JS, Mongoose</p>
               <small className="m-0 text-muted">2021 - 2022</small>
-              <p className="m-0 mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione ab maiores ipsam mollitia reprehenderit dignissimos.</p>
+              <p className="m-0 mt-4">
+                Full stack development includes pretty much any project where
+                you're working on (or building) both the front and back end of a
+                site or app at the same time
+              </p>
             </div>
-           {/*  <i class="bi bi-pencil" style={{ fontSize: "20px" }}></i> */}
+            {/*  <i class="bi bi-pencil" style={{ fontSize: "20px" }}></i> */}
           </div>
         </div>
         {/* Education detail row ends */}
