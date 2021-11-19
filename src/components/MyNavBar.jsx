@@ -15,6 +15,7 @@ import {
 import userCircle from "../assets/abstract-user.svg";
 import gridSvg from "../assets/grid-3x3.svg";
 
+const user = {};
 const MyNavBar = (props) => {
   return (
     <Navbar sticky="top" expand="lg" variant="light" bg="light">
@@ -53,7 +54,7 @@ const MyNavBar = (props) => {
             className="d-flex justify-space-around nav-icons align-items-center"
             style={{ borderRight: "1px solid lightgrey", cursor: "pointer" }}
           >
-            <Link to="/feed">
+            <Link to={`/feed/${process.env.REACT_APP_USER}`}>
               <div
                 className="d-flex flex-column mr-4 small-hover"
                 style={{ alignItems: "center" }}
