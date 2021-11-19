@@ -45,7 +45,7 @@ const AddToYourFeed = () => {
               className="brdr-linkedin brdr-linked-people-you-may-know mb-3"
               style={{ width: "320px", height: "auto" }}
             >
-              <h5>add to your feed</h5>
+              <h5>Add to your feed</h5>
               {selectedUsers.map((user) => {
                 return (
                   <div className="who-and-where mb-4">
