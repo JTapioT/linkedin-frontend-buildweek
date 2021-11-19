@@ -154,7 +154,7 @@ const MyNavBar = (props) => {
                 style={{ cursor: "pointer" }}
                 className="d-flex align-items-center"
               >
-                <Link to="/profile/me">
+                <Link to={`/profile/${process.env.REACT_APP_USER}`}>
                   <small className="p-0 m-0 text-muted">Me</small>
                 </Link>
               </Dropdown.Toggle>

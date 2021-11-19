@@ -10,7 +10,7 @@ const UserInfoJumbotron = (props) => {
 
   async function getData() {
     const response = await fetch(
-      `https://linkedin-buildweek.herokuapp.com/profile/${userId}`
+      `https://linkedin-buildweek.herokuapp.com/profile/${userId === "me" ? process.env.REACT_APP_USER : userId}`
       /*{
         headers: {
           Authorization:
