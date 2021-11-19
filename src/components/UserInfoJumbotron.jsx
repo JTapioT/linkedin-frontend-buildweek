@@ -135,8 +135,9 @@ const UserInfoJumbotron = (props) => {
                   className="default-btn-style"
                   style={{ marginLeft: "5px" }}
                   variant="outline-secondary"
+                  href={`https://linkedin-buildweek.herokuapp.com/profile/${userId}/PDF`}
                 >
-                  More
+                  Profile PDF
                 </Button>
               </Row>
             </Card.Text>
