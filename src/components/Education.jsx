@@ -22,7 +22,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "http://www.floorepoxyindustrial.com/images/colorchart/medium-gray.jpg"
+                "https://irp-cdn.multiscreensite.com/adbdb732/dms3rep/multi/desktop/d5787e63701d477c8edf92b5b32bdd93-190x190.dm.edit_PAjBvB.png"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
@@ -48,7 +48,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "http://www.floorepoxyindustrial.com/images/colorchart/medium-gray.jpg"
+                "https://irp-cdn.multiscreensite.com/adbdb732/dms3rep/multi/desktop/d5787e63701d477c8edf92b5b32bdd93-190x190.dm.edit_PAjBvB.png"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
@@ -74,7 +74,7 @@ function Education() {
           <div className="mr-3">
             <img
               src={
-                "http://www.floorepoxyindustrial.com/images/colorchart/medium-gray.jpg"
+                "https://irp-cdn.multiscreensite.com/adbdb732/dms3rep/multi/desktop/d5787e63701d477c8edf92b5b32bdd93-190x190.dm.edit_PAjBvB.png"
               }
               style={{ width: "80px", height: "80px" }}
               alt="thumbnail for now"
