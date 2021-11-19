@@ -56,7 +56,12 @@ const UserInfoJumbotron = (props) => {
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDc0O3fcrVTpsTEMikVqUoY6ykCb3Bu66miw&usqp=CAU"
           />
 
-          <EditProfile id={userId} />
+          <Row>
+            <Col md={8}></Col>{" "}
+            <Col md={4}>
+              <EditProfile id={userId} />
+            </Col>
+          </Row>
           <Card.Body>
             <Card.Text>
               <Row>

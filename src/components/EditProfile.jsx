@@ -111,7 +111,7 @@ class EditProfile extends React.Component {
                 }}
                 style={{
                   marginTop: "10px",
-                  marginLeft: "720px",
+                  // marginLeft: "720px",
                   fontSize: "20px",
                 }}
               ></i>
