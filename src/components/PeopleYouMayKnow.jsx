@@ -42,12 +42,13 @@ const PeopleYouMayKnow = (props) => {
                 </div>
                 <div className="name-company">
                   <Link
+                    to={`/profile/${user._id}`}
                     className="text-dark"
                     style={{ textDecoration: "none" }}
-                    onClick={() => {
+                    /* onClick={() => {
                       history.push(`/profile/${user._id}`);
                       history.go();
-                    }}
+                    }} */
                   >
                     <h6>
                       {user.name} {user.surname}
