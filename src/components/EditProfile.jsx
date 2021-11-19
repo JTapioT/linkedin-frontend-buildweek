@@ -4,7 +4,7 @@ import React from "react";
 class EditProfile extends React.Component {
   state = {
     show: false,
-    userId: this.props.id === "me" ? "6163efdfa890cc0015cf07de" : this.props.id,
+    userId: this.props.id === "me" ? "619647f7fffa097d09ede238" : this.props.id,
     user: {},
     isFileUploaded: false,
     fileName: null,
