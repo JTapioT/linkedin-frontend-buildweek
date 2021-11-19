@@ -13,6 +13,9 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Route exact path="/">
+          <Redirect to="/feed/me" />
+        </Route>
         <Route
           path="/feed/:userId"
           render={(props) => (
