@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
+
 
 const PeopleYouMayKnow = (props) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
@@ -20,6 +21,8 @@ const PeopleYouMayKnow = (props) => {
     }
   }
 
+  const history = useHistory();
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -39,8 +42,12 @@ const PeopleYouMayKnow = (props) => {
                 </div>
                 <div className="name-company">
                   <Link
-                    to={`/profile/${user._id}`}
                     className="text-dark"
+                    style={{ textDecoration: "none" }}
+                    onClick={() => {
+                      history.push(`/profile/${user._id}`);
+                      history.go();
+                    }}
                   >
                     <h6>
                       {user.name} {user.surname}
@@ -57,4 +64,4 @@ const PeopleYouMayKnow = (props) => {
   );
 };
 
-export default PeopleYouMayKnow;
+export default withRouter(PeopleYouMayKnow);
